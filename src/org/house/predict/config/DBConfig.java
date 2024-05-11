@@ -6,11 +6,12 @@ import java.util.*;
 
 public class DBConfig {
 
-	protected Connection conn;
-	protected PreparedStatement stmt;
-	protected ResultSet rs;
+	private static Connection conn;
+	private static PreparedStatement stmt;
+	private static ResultSet rs;
 
-	public DBConfig() {
+	private static DBConfig db=null;
+	private DBConfig() {
 		try {
 			Properties p = new Properties();
 			p.load(PathHelper.fin);
@@ -28,6 +29,26 @@ public class DBConfig {
 		} catch (Exception ex) {
 			System.out.println("Error is " + ex);
 		}
+	}
+	public static DBConfig getDBInstance()
+	{
+		if(db==null)
+		{
+			db= new DBConfig();
+		}
+		return db;
+	}
+	public static Connection getConnection()
+	{
+		return conn;
+	}
+	public static PreparedStatement getStatement()
+	{
+		return stmt;
+	}
+	public static ResultSet getResultSet()
+	{
+		return rs;
 	}
 
 }
