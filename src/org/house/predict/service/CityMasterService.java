@@ -18,5 +18,9 @@ public class CityMasterService {
 	{
 		return cityrepo.getAllCities();
 	}
+	public boolean isAddBulkCity()
+	{
+		return cityrepo.isAddBulkCity();
+	}
 
 }
