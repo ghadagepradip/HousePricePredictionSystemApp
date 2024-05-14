@@ -16,6 +16,7 @@ public class PredictionClientApplication {
 		{
 			System.out.println("1)Add New City");
 			System.out.println("2)View All City");
+			System.out.println("3)Add bulk Cities");
 //			System.out.println(")Exit");
 			System.out.println("Enter your choice...");
 			int choice=sc.nextInt();
@@ -46,6 +47,17 @@ public class PredictionClientApplication {
 				else
 				{
 					System.out.println("There is no city present");
+				}
+				break;
+			case 3:
+				b=cms.isAddBulkCity();
+				if(b)
+				{
+					System.out.println("Cities addesd succesfully");
+				}
+				else
+				{
+					System.out.println("Error while adding cities");
 				}
 				break;
 			default:System.out.println("Enter correct choice");
