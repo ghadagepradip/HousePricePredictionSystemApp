@@ -2,6 +2,7 @@ package org.house.predict.service;
 
 import java.util.List;
 
+import org.house.predict.model.AreaMasterModel;
 import org.house.predict.model.CityMasterModel;
 import org.house.predict.repository.CityMasterRepository;
 
@@ -21,6 +22,18 @@ public class CityMasterService {
 	public boolean isAddBulkCity()
 	{
 		return cityrepo.isAddBulkCity();
+	}
+	public int getCityID(String cityname)
+	{
+		return cityrepo.getCityID(cityname);
+	}
+	public int getAreaIdAutomatic()
+	{
+		return cityrepo.getAreaIdAutomatic();
+	}
+	public boolean isAddArea(AreaMasterModel amodel)
+	{
+		return cityrepo.isAddArea(amodel);
 	}
 
 }
