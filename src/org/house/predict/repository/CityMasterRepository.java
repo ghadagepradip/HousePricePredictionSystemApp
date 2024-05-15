@@ -1,6 +1,7 @@
 package org.house.predict.repository;
 
 import java.io.*;
+import java.sql.*;
 import java.sql.SQLException;
 import java.util.*;
 import org.house.predict.config.DBConfig;
@@ -13,6 +14,7 @@ public class CityMasterRepository extends DBHelper {
 
 	private int areaid = 0;
 	private LinkedHashMap<String,Integer>map;
+	LinkedHashMap<String,ArrayList<String>>citywiseareaname;
 
 	/*
 	 * this method can add city in database table name as citymaster and get data
@@ -135,6 +137,38 @@ public class CityMasterRepository extends DBHelper {
 			System.out.println("Error is "+e);
 			return null;
 			
+		}
+		
+	}
+	public LinkedHashMap<String,ArrayList<String>> getCityWiseAreaName()
+	{
+		try {
+			this.citywiseareaname=new LinkedHashMap<String,ArrayList<String>>();
+			PreparedStatement pstmt=conn.prepareStatement("select cityname from citymaster;");
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				String cityname=rs.getString(1);
+//				System.out.println(cityname);
+				stmt=conn.prepareStatement(" select am.areaname from citymaster cm inner join cityareajoin caj on"
+						+ " cm.cityid=caj.cityid inner join areamaster am on am.aid=caj.aid where cityname=?;");
+				stmt.setString(1, cityname);
+				ResultSet rs1=stmt.executeQuery();
+//				System.out.println(rs1.next());
+//				if(rs1.next())
+//				{
+					ArrayList<String>areaname=new ArrayList<String>();
+					while(rs1.next())
+					{
+						areaname.add(rs1.getString(1));
+					}
+					this.citywiseareaname.put(cityname, areaname);
+//				}
+			}
+			return citywiseareaname;
+		} catch (SQLException e) {
+			System.out.println("Error is "+e);
+			return null;
 		}
 		
 	}
