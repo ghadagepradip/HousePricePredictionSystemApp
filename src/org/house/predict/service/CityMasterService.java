@@ -1,5 +1,6 @@
 package org.house.predict.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.house.predict.model.AreaMasterModel;
@@ -34,6 +35,10 @@ public class CityMasterService {
 	public boolean isAddArea(AreaMasterModel amodel)
 	{
 		return cityrepo.isAddArea(amodel);
+	}
+	public LinkedHashMap<String,Integer> getCityWiseAreaCount()
+	{
+		return cityrepo.getCityWiseAreaCount();
 	}
 
 }

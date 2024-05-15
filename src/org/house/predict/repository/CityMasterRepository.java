@@ -12,6 +12,7 @@ import org.house.predict.model.CityMasterModel;
 public class CityMasterRepository extends DBHelper {
 
 	private int areaid = 0;
+	private LinkedHashMap<String,Integer>map;
 
 	/*
 	 * this method can add city in database table name as citymaster and get data
@@ -115,6 +116,27 @@ public class CityMasterRepository extends DBHelper {
 			System.out.println("Error while adding area...");
 			return false;
 		}
+	}
+	public LinkedHashMap<String,Integer> getCityWiseAreaCount()
+	{
+		this.map=new LinkedHashMap<String,Integer>();
+		try {
+			stmt=conn.prepareStatement(" select cm.cityname,count(caj.cityid) from citymaster cm inner join"
+					+ " cityareajoin caj on cm.cityid=caj.cityid inner join areamaster am on caj.aid=am.aid"
+					+ " group by cm.cityname;");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				map.put(rs.getString(1), rs.getInt(2));
+			}
+			return map;
+			
+		} catch (SQLException e) {
+			System.out.println("Error is "+e);
+			return null;
+			
+		}
+		
 	}
 
 }

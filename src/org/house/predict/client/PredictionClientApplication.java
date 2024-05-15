@@ -19,6 +19,7 @@ public class PredictionClientApplication {
 			System.out.println("2)View All City");
 			System.out.println("3)Add bulk Cities");
 			System.out.println("4)Add New area");
+			System.out.println("5)City Wise Area Count");
 //			System.out.println(")Exit");
 			System.out.println("Enter your choice...");
 			int choice=sc.nextInt();
@@ -108,6 +109,16 @@ public class PredictionClientApplication {
 					{
 						System.out.println("Thank you....");
 					}
+				}
+				
+				break;
+				
+			case 5:
+				LinkedHashMap<String,Integer>map=cms.getCityWiseAreaCount();
+				Set<Map.Entry<String,Integer>>set=map.entrySet();
+				for(Map.Entry<String,Integer>m:set)
+				{
+					System.out.println(m.getKey()+"\t"+m.getValue());
 				}
 				
 				break;
