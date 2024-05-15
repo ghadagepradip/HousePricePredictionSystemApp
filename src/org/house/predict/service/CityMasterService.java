@@ -1,5 +1,6 @@
 package org.house.predict.service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class CityMasterService {
 	public LinkedHashMap<String,Integer> getCityWiseAreaCount()
 	{
 		return cityrepo.getCityWiseAreaCount();
+	}
+	public LinkedHashMap<String,ArrayList<String>> getCityWiseAreaName()
+	{
+		return cityrepo.getCityWiseAreaName();
 	}
 
 }
