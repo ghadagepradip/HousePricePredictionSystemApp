@@ -3,9 +3,9 @@ import java.sql.*;
 
 public class DBHelper {
 	protected DBConfig db=DBConfig.getDBInstance();
-	protected Connection conn=DBConfig.getConnection();
-	protected PreparedStatement stmt=DBConfig.getStatement();
-	protected ResultSet rs=DBConfig.getResultSet();
+	protected Connection conn=db.getConnection();
+	protected PreparedStatement stmt=db.getStatement();
+	protected ResultSet rs=db.getResultSet();
 	
 
 }
