@@ -38,15 +38,15 @@ public class DBConfig {
 		}
 		return db;
 	}
-	public static Connection getConnection()
+	public  Connection getConnection()
 	{
 		return conn;
 	}
-	public static PreparedStatement getStatement()
+	public  PreparedStatement getStatement()
 	{
 		return stmt;
 	}
-	public static ResultSet getResultSet()
+	public  ResultSet getResultSet()
 	{
 		return rs;
 	}
