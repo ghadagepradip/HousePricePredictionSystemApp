@@ -45,5 +45,9 @@ public class CityMasterService {
 	{
 		return cityrepo.getCityWiseAreaName();
 	}
+	public int getAreaIdByName(AreaMasterModel model)
+	{
+		return cityrepo.getAreaIdByName(model);
+	}
 
 }
