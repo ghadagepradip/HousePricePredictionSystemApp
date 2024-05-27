@@ -94,6 +94,26 @@ public class PropertyRepository extends DBHelper {
 		}
 
 	}
-	
+	public List<Object[]> getareawisepropertycount(String name)
+	{
+		try
+		{
+			this.areawisepcount =new ArrayList<Object[]>();
+			stmt=conn.prepareStatement(" select am.areaname,count(pm.pid) from areamaster am inner join cityareajoin caj on caj.aid=am.aid inner join citymaster cm on cm.cityid=caj.cityid inner join propertymaster pm on pm.aid=am.aid where cm.cityname='"+name+"' group by am.areaname;");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				Object obj[]=new Object[] {rs.getString(1),rs.getInt(2)};
+				this.areawisepcount.add(obj);
+				
+			}
+			return areawisepcount;
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error is "+e);
+			return null;
+		}
+	}
 
 }
