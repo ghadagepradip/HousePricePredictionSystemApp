@@ -29,6 +29,7 @@ public class PredictionClientApplication {
 			System.out.println("7)Add area in square feet");
 			System.out.println("8)Add new Aminities");
 			System.out.println("9)Add new property");
+			System.out.println("10)Area wise property count");
 //			System.out.println(")Exit");
 			System.out.println("Enter your choice...");
 			int choice = sc.nextInt();
@@ -230,6 +231,16 @@ public class PredictionClientApplication {
 				else
 				{
 					System.out.println("Property Not Added....");
+				}
+				break;
+			case 10:
+				System.out.println("Enter city name");
+				String city=sc.nextLine();
+				List<Object[]>propcount=propservice.getareawisepropertycount(city);
+				System.out.println("Areaname\tpropertycount");
+				for(Object obj[]:propcount)
+				{
+					System.out.println(obj[0]+"\t"+obj[1]);
 				}
 				break;
 			default:
