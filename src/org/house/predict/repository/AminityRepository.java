@@ -20,5 +20,27 @@ public class AminityRepository extends DBHelper {
 			return false;
 		}
 	}
+	public int getAminityId(String name)
+	{
+		try
+		{
+			stmt=conn.prepareStatement("Select amid from aminitymaster where aminity=?");
+			stmt.setString(1, name);
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				return rs.getInt(1);
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error is "+e);
+			return 0;
+		}
+	}
 
 }

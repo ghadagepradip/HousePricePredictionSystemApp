@@ -11,5 +11,9 @@ public class AminityService {
 	{
 		return amrepo.isAddAminity(model);
 	}
+	public int getAminityId(String name)
+	{
+		return amrepo.getAminityId(name);
+	}
 
 }

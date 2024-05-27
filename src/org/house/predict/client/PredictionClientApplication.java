@@ -169,6 +169,7 @@ public class PredictionClientApplication {
 				System.out.println("Enter number of bed and bath");
 				int nbed=sc.nextInt();
 				int nbath=sc.nextInt();
+				sc.nextLine();
 				int cityId=cms.getCityID(cityname);
 				AreaMasterModel m=new AreaMasterModel();
 				m.setAreaname(areaname);
@@ -189,11 +190,14 @@ public class PredictionClientApplication {
 				
 					List<AminityModel>aminitylist=new ArrayList<AminityModel>();
 					String str="";
+					
 					do {
-						sc.nextLine();
+						
 						System.out.println("Enter aminity name");
 						String aname=sc.nextLine();
 						AminityModel amModel=new AminityModel();
+						int amid = aservice.getAminityId(aname);
+						amModel.setId(amid);
 						amModel.setName(aname);
 						aminitylist.add(amModel);
 						System.out.println("Do you want to add more aminities");
@@ -210,13 +214,11 @@ public class PredictionClientApplication {
 				areamodel.setSquareFeet(landarea);
 				propmodel.setSqmodel(areamodel);
 				propmodel.setList(aminitylist);
-				System.out.println("Enter price and date of registory");
+				System.out.println("Enter price ");
 				int price=sc.nextInt();
-				sc.nextLine();
-				String rdate=sc.nextLine();
 				DealModel dmodel=new DealModel();
 				dmodel.setPrice(price);
-				dmodel.setDate(rdate);
+//				dmodel.setDate(rdate);
 				propmodel.setDmodel(dmodel);
 				
 				b=propservice.isAddNewProperty(propmodel);
@@ -229,8 +231,6 @@ public class PredictionClientApplication {
 				{
 					System.out.println("Property Not Added....");
 				}
-				
-				
 				break;
 			default:
 				System.out.println("Enter correct choice");

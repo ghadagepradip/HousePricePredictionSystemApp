@@ -1,5 +1,5 @@
 package org.house.predict.model;
-
+import java.util.*;
 public class DealModel {
 
 	private int transid;
@@ -23,11 +23,11 @@ public class DealModel {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
-	private String date;
+	private Date date;
 }
