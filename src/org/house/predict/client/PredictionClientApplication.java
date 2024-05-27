@@ -8,6 +8,7 @@ import org.house.predict.model.*;
 import org.house.predict.service.AminityService;
 import org.house.predict.service.AreaSquareFeetServices;
 import org.house.predict.service.CityMasterService;
+import org.house.predict.service.PropertyService;
 
 public class PredictionClientApplication {
 
@@ -17,6 +18,7 @@ public class PredictionClientApplication {
 		CityMasterService cms = new CityMasterService();
 		AreaSquareFeetServices areasq = new AreaSquareFeetServices();
 		AminityService aservice = new AminityService();
+		PropertyService propservice=new PropertyService();
 		do {
 			System.out.println("1)Add New City");
 			System.out.println("2)View All City");
@@ -26,6 +28,7 @@ public class PredictionClientApplication {
 			System.out.println("6)City Wise Area name");
 			System.out.println("7)Add area in square feet");
 			System.out.println("8)Add new Aminities");
+			System.out.println("9)Add new property");
 //			System.out.println(")Exit");
 			System.out.println("Enter your choice...");
 			int choice = sc.nextInt();
@@ -152,6 +155,81 @@ public class PredictionClientApplication {
 				else
 				{
 					System.out.println("Error while adding aminity");
+				}
+				break;
+			case 9:
+				System.out.println("Enter city name");
+				String cityname=sc.nextLine();
+				System.out.println("Enter area name");
+				String areaname=sc.nextLine();
+				System.out.println("Enter address of property");
+				String add=sc.nextLine();
+				System.out.println("Enter land area");
+				int landarea=sc.nextInt();
+				System.out.println("Enter number of bed and bath");
+				int nbed=sc.nextInt();
+				int nbath=sc.nextInt();
+				sc.nextLine();
+				int cityId=cms.getCityID(cityname);
+				AreaMasterModel m=new AreaMasterModel();
+				m.setAreaname(areaname);
+				m.setCityName(cityname);
+				int areaid=cms.getAreaIdByName(m);
+//				System.out.println(areaid);	
+				m.setCityid(cityId);
+				m.setAid(areaid);
+				int sqid=areasq.getSquareFeetId(landarea);
+				if(sqid==-1)
+				{
+					System.out.println("there is some exception");
+				}
+				else if(sqid==0)
+				{
+					System.out.println("Square area not present do you want to add new squarearea");
+				}
+				
+					List<AminityModel>aminitylist=new ArrayList<AminityModel>();
+					String str="";
+					
+					do {
+						
+						System.out.println("Enter aminity name");
+						String aname=sc.nextLine();
+						AminityModel amModel=new AminityModel();
+						int amid = aservice.getAminityId(aname);
+						amModel.setId(amid);
+						amModel.setName(aname);
+						aminitylist.add(amModel);
+						System.out.println("Do you want to add more aminities");
+						str=sc.nextLine();
+					}while(str.equals("yes"));
+				
+				PropertyModel propmodel = new PropertyModel();
+				propmodel.setAreamodel(m);
+				propmodel.setName(add);
+				propmodel.setNbath(nbath);
+				propmodel.setNbed(nbed);
+				areamodel=new AreaSquareFeetModel();
+				areamodel.setId(sqid);
+				areamodel.setSquareFeet(landarea);
+				propmodel.setSqmodel(areamodel);
+				propmodel.setList(aminitylist);
+				System.out.println("Enter price ");
+				int price=sc.nextInt();
+				DealModel dmodel=new DealModel();
+				dmodel.setPrice(price);
+//				dmodel.setDate(rdate);
+				propmodel.setDmodel(dmodel);
+				
+				b=propservice.isAddNewProperty(propmodel);
+				
+				if(b)
+				{
+					System.out.println("Property Added succesfully");
+				}
+				else
+				{
+					System.out.println("Property Not Added....");
 				}
 				break;
 			default:

@@ -1,6 +1,6 @@
 package org.house.predict.model;
 
-public class AreaMasterModel {
+public class AreaMasterModel extends CityMasterModel{
 	private int aid;
 	private String areaname;
 	private int cityid;

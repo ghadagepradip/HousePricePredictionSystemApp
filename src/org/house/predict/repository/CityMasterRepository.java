@@ -172,5 +172,29 @@ public class CityMasterRepository extends DBHelper {
 		}
 		
 	}
+	public int getAreaIdByName(AreaMasterModel model)
+	{
+		try
+		{
+			stmt=conn.prepareStatement("select am.aid from areamaster am inner join cityareajoin caj on caj.aid=am.aid inner join citymaster cm on caj.cityid=cm.cityid where am.areaname=? and cm.cityname=?;");
+			stmt.setString(1, model.getAreaname());
+			stmt.setString(2, model.getCityName());
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				return rs.getInt(1);
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error is "+e);
+			return -1;
+		}
+	}
+	
 
 }

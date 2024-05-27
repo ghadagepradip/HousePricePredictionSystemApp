@@ -19,5 +19,26 @@ public class AreaSquareFeetRepository extends DBHelper {
 			return false;
 		}
 	}
+	public int getSquareFeetId(int landarea)
+	{
+		try {
+			stmt=conn.prepareStatement("Select sqid from areasquarefeet where areainfeet=?");
+			stmt.setInt(1, landarea);
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				return rs.getInt(1);
+				
+			}
+			else
+			{
+				return 0;
+			}
+		} catch (SQLException e) {
+			System.out.println("Error is "+e);
+			return -1;
+		}
+
+	}
 
 }

@@ -10,5 +10,9 @@ public class AreaSquareFeetServices {
 	{
 		return areasq.isAddSquareFeet(model);
 	}
+	public int getSquareFeetId(int landarea)
+	{
+		return areasq.getSquareFeetId(landarea);
+	}
 
 }
